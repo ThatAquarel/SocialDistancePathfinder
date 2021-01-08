@@ -77,8 +77,8 @@ while True:
         if len(results) >= 2:
             # extract all centroids from the results and compute the
             # Euclidean distances between all pairs of the centroids
-            centroids = np.array([r[2] for r in results])
-            D = dist.cdist(centroids, centroids, metric="euclidean")
+            violate_centroids = np.array([r[2] for r in results])
+            D = dist.cdist(violate_centroids, violate_centroids, metric="euclidean")
             # loop over the upper triangular of the distance matrix
             for i in range(0, D.shape[0]):
                 for j in range(i + 1, D.shape[1]):
@@ -92,6 +92,7 @@ while True:
                         violate.add(j)
 
         # loop over the results
+        violate_centroids = []
         centroids = []
 
         for (i, (prob, bbox, centroid)) in enumerate(results):
@@ -103,12 +104,16 @@ while True:
             color = (0, 255, 0)
             # if the index pair exists within the violation set, then
             # update the color
+
+            resize_x = int((config.OUTPUT_X / frame.shape[1]) * cX)
+            resize_y = int((config.OUTPUT_Y / frame.shape[0]) * cY)
+
+            centroids.append((resize_x, resize_y))
+
             if i in violate:
                 color = (0, 0, 255)
 
-                resize_x = int((config.OUTPUT_X / frame.shape[1]) * cX)
-                resize_y = int((config.OUTPUT_Y / frame.shape[0]) * cY)
-                centroids.append((resize_x, resize_y))
+                violate_centroids.append((resize_x, resize_y))
 
             # draw (1) a bounding box around the person and (2) the
             # centroid coordinates of the person,
@@ -124,8 +129,11 @@ while True:
 
         frame = cv2.resize(frame, output_size)
 
-        heatmap = heatmapper.getMap(centroids, frame, iteration)
+        heatmap = heatmapper.getMap(violate_centroids, frame, iteration)
         flowmap = flowmapper.getMap(centroids, frame, iteration)
+
+        for line in flowmap:
+            cv2.line(frame, line[0], line[1], (255, 255, 255), 3)
 
         # show the output frame
         cv2.imshow("Frame", np.hstack((frame, heatmap)))
