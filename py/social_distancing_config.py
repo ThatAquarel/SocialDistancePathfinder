@@ -9,3 +9,9 @@ USE_GPU = False
 # define the minimum safe distance (in pixels) that two people can be
 # from each other
 MIN_DISTANCE = 50
+
+BLOCKSIZE_X = 30
+BLOCKSIZE_Y = BLOCKSIZE_X
+
+OUTPUT_X = 960
+OUTPUT_Y = 540
