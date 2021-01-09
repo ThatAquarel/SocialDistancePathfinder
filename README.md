@@ -1,4 +1,4 @@
-# SocialDistancePathfinder
+# Social Distance Pathfinder
 Automatically finds the safest path for you to take given some footage.
 
 ## Video Demo
