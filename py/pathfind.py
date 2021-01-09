@@ -158,3 +158,15 @@ def recursionFinder(average, x, y):
         # else: recursion is over limit, stop
         # return to stop
         return
+
+
+def findRegressionLine(path):
+    x = []
+    y = []
+
+    for x1 in range(config.BLOCKSIZE_X):
+        for y1 in range(config.BLOCKSIZE_Y):
+            x.append(x1)
+            y.append(y1)
+
+    return x, y
