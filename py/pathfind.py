@@ -164,9 +164,10 @@ def findRegressionLine(path):
     x = []
     y = []
 
-    for x1 in range(config.BLOCKSIZE_X):
-        for y1 in range(config.BLOCKSIZE_Y):
-            x.append(x1)
-            y.append(y1)
+    for x1 in range(config.ZONES_X):
+        for y1 in range(config.ZONES_Y):
+            if path[x1][y1] == 1:
+                x.append(x1)
+                y.append(y1)
 
     return x, y
