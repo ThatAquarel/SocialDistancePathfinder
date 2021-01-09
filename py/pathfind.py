@@ -161,13 +161,21 @@ def recursionFinder(average, x, y):
 
 
 def findRegressionLine(path):
+    # return points to use with linear regression
+    # init two lists where points are going to be stored
     x = []
     y = []
 
+    # iterate over every spot
+    # horizontally
     for x1 in range(config.ZONES_X):
+        # vertically
         for y1 in range(config.ZONES_Y):
+            # if current spot has been set as a viable path
             if path[x1][y1] == 1:
+                # add current spot's coords to lists
                 x.append(x1)
                 y.append(y1)
 
+    # return lists
     return x, y
