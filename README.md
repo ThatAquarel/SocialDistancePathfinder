@@ -6,7 +6,7 @@ Automatically finds the safest path for you to take given some footage.
 
 ## The heatmap
 The heatmap shows the overall traffic of a certain location.
-Green squares represents places that are less frequented while the red squares represents places to are heavily frequented.
+Green squares represents places that are less frequented while the red squares represents places that are heavily frequented.
 Two types of circles are also drawn, the thicker ones represent the people that don't follow social distancing guidelines, the thinner ones are those that follow these rules.
 There is also a trail drawn behind every person, representing the path they have taken and their general direction.
 The heatmap will compile an average of every frame and update accordingly.
