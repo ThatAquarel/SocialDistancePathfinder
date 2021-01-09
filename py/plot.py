@@ -24,7 +24,9 @@ def update(x, y, plot, fig):
     plt.xlim(config.ZONES_X)
     plt.ylim(config.ZONES_Y)
 
-    plt.plot(x, getResult(x, y))
+    results = getResult(x, y)
+
+    plt.plot(x, results)
     plt.plot(x, y, 'o')
 
     fig.canvas.draw()
@@ -39,7 +41,7 @@ def update(x, y, plot, fig):
 
     # display image with opencv or any operation you like
 
-    return img
+    return img, results
 
 
 def getResult(x, y):
@@ -56,3 +58,16 @@ def getResult(x, y):
         result.append(m * x_ + b)
 
     return result
+
+
+def drawLine(frame, x, result):
+    for i in range(len(x)):
+        j = i + 1
+        if j < len(x):
+            x1 = int(x[i] * config.BLOCKSIZE_X)
+            y1 = int(result[i] * config.BLOCKSIZE_Y)
+            x2 = int(x[j] * config.BLOCKSIZE_X)
+            y2 = int(result[j] * config.BLOCKSIZE_Y)
+
+            cv2.line(frame, (x1, y1), (x2, y2), (3, 227, 252), 4)
+    return frame

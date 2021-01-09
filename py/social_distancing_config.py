@@ -61,3 +61,5 @@ PATHFIND_RECURSION_LIMIT = 500
 # in a percentage, meaning that if less than 5% of the area is filled
 # current path will be scraped and generated next frame
 PATH_PERCENTAGE = 0.05
+
+SHOW_REGRESSION = True
