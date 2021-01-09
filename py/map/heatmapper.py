@@ -2,19 +2,14 @@ import numpy as np
 from py import social_distancing_config as config
 import cv2
 
-# get how many subdivisions, ie how many squares
-# horizontal
-zones_x = int(config.OUTPUT_X / config.BLOCKSIZE_X)
-
-# vertical
-zones_y = int(config.OUTPUT_Y / config.BLOCKSIZE_Y)
-
 # create empty ndarrays with the shape defined previously
+# they are global variables because heatmap is cumulative
+# it accumulates data from every frame and then updates
 # raw data list
-zones = np.zeros(shape=(zones_x, zones_y))
+zones = np.zeros(shape=(config.ZONES_X, config.ZONES_Y))
 
 # percentages
-average = np.zeros(shape=(zones_x, zones_y))
+average = np.zeros(shape=(config.ZONES_X, config.ZONES_Y))
 
 
 def getGradient(percent):
@@ -27,18 +22,21 @@ def getGradient(percent):
 
 
 def getMap(centroids, frame, iteration):
+    # use global variables
+    global zones, average
+
     # copy ndarray object
     heatmap = np.copy(frame)
 
     # create empty ndarray to check if zone has been triggered
     # to prevent two people from being registered at once
-    trig = np.zeros(shape=(zones_x, zones_y)).copy()
+    trig = np.zeros(shape=(config.ZONES_X, config.ZONES_Y)).copy()
 
     # iterate over every spot
     # horizontally
-    for x in range(zones_x):
+    for x in range(config.ZONES_X):
         # vertically
-        for y in range(zones_y):
+        for y in range(config.ZONES_Y):
             # get top left corner of zone
             x1 = x * config.BLOCKSIZE_X
             y1 = y * config.BLOCKSIZE_Y
@@ -92,5 +90,5 @@ def getMap(centroids, frame, iteration):
             # draw current zone's value by getting gradient between red and green
             cv2.rectangle(heatmap, (x1, y1), (x2, y2), getGradient(average[x][y]), -1)
 
-    # returns heatmap and other values required for other programs
-    return heatmap, (average, zones_x, zones_y)
+    # returns heatmap and average
+    return heatmap, average

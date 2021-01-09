@@ -4,7 +4,7 @@ from scipy.spatial import distance as dist
 first = True
 
 # create list for recording past centroids
-lastCentroids = []
+pastCentroids = []
 
 # create list of lines for mapping flow
 lines = []
