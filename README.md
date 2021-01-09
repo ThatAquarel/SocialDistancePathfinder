@@ -5,16 +5,17 @@ Automatically finds the safest path for you to take given some footage.
 [![Watch the video](https://img.youtube.com/vi/YW-d8_-I8ck/maxresdefault.jpg)](https://youtu.be/YW-d8_-I8ck)
 
 ## The heatmap
-The heatmap shows the places where people are most likely to go to.
-Green is the safest place to go and red is the places where most people are attracted to.
+The heatmap shows the overall traffic of a certain location.
+Green is represents places that are less frequented while the red heatmaps represents places to are heavily frequented.
 Two types of circles are also drawn, the thicker ones represent the people that don't follow social distancing guidelines, the thinner ones are those that follow these rules.
-There is also a trail drawn behind every person, representing their moving direction.
+There is also a trail drawn behind every person, representing the path they have taken and their general direction.
+The heatmap will conpile an average of every frame and update accordingly.
 
 ## Live Footage
-The live footage represents the actual footage the algorithm runs on. Bounding boxes are drawn around the people, a red one would mean that this person is not following social distancing, a green ones are those that follow the rules. The white highlighted area is the best path you can take according to the algorithm, the yellow line is then calculated with that data to show the best straight path you can take. The blue square is the position where the algorithm starts pathfinding.
+The live footage represents the actual footage the algorithm runs on. Bounding boxes are drawn around the people, a red one would mean that this person is not following social distancing, a green ones are those that follow the rules. The white highlighted area is the best path you can take according to the algorithm, the yellow line is then calculated with that data to show the best straight path you can take. The blue square represents the person that is considered safest, that is further away from the red zones in the heatmaps. The white highlighted area starts pathfinding from the blue square.
 
 ## Data Plot
-This plot draws the points from the white highlighted area and uses linear regression to calculate the straight path.
+The data plot is determined by the white area, generated using recursion starting from the blue square. Each data point in the plot represents one white square. The path (yellow line) is determined by using regression with all the data points, through a function in MathPlotLib.
 
 ## Algorithm
 - YOLOv3-608 pretrained models from https://pjreddie.com/darknet/yolo/
