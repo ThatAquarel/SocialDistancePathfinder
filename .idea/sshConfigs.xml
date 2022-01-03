@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="10.0.0.42" id="231d17bb-01bf-4e0f-89c2-b99d4fb8f27f" keyPath="C:\Users\xia_t\Desktop\Main Folder\ssh\id_rsa_lenovo.ppk" port="51422" nameFormat="DESCRIPTIVE" username="tianyi" />
+    </configs>
+  </component>
+</project>
